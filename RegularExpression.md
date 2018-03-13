@@ -80,6 +80,61 @@ Unicode is a character set that aims to define all characters and glyphs from al
 
 ![untitled](https://user-images.githubusercontent.com/36118701/37287447-6ba90026-2637-11e8-87d8-6af965afd27d.png)
 
+##### 2.4.1 Case Insensitive
+
+The `i` modifier is used to perform case-insensitive matching. For example, the
+regular expression `/The/gi` means: uppercase letter `T`, followed by lowercase
+character `h`, followed by character `e`. And at the end of regular expression
+the `i` flag tells the regular expression engine to ignore the case. As you can
+see we also provided `g` flag because we want to search for the pattern in the
+whole input string.
+
+<pre>
+"The" => <a href="#T-T"><strong>The</strong></a> fat cat sat on the mat.
+</pre>
+
+<pre>
+"/The/gi" => <a href="#T-T"><strong>The</strong></a> fat cat sat on <a href="#T-T"><strong>the</strong></a> mat.
+</pre>
+
+##### 2.4.2 Global search
+
+The `g` modifier is used to perform a global match (find all matches rather than
+stopping after the first match). For example, the regular expression`/.(at)/g`
+means: any character except new line, followed by lowercase character `a`,
+followed by lowercase character `t`. Because we provided `g` flag at the end of
+the regular expression now it will find all matches in the input string, not just the first one (which is the default behavior).
+
+<pre>
+"/.(at)/" => The <a href="#T-T"><strong>fat</strong></a> cat sat on the mat.
+</pre>
+
+<pre>
+"/.(at)/g" => The <a href="#T-T"><strong>fat</strong></a> <a href="#T-T"><strong>cat</strong></a> <a href="#T-T"><strong>sat</strong></a> on the <a href="#T-T"><strong>mat</strong></a>.
+</pre>
+
+##### 2.4.3 Multiline
+
+The `m` modifier is used to perform a multi-line match. As we discussed earlier
+anchors `(^, $)` are used to check if pattern is the beginning of the input or
+end of the input string. But if we want that anchors works on each line we use
+`m` flag. For example, the regular expression `/at(.)?$/gm` means: lowercase
+character `a`, followed by lowercase character `t`, optionally anything except
+new line. And because of `m` flag now regular expression engine matches pattern
+at the end of each line in a string.
+
+<pre>
+"/.at(.)?$/" => The fat
+                cat sat
+                on the <a href="#T-T"><strong>mat.</strong></a>
+</pre>
+
+<pre>
+"/.at(.)?$/gm" => The <a href="#T-T"><strong>fat</strong></a>
+                  cat <a href="#T-T"><strong>sat</strong></a>
+                  on the <a href="#T-T"><strong>mat.</strong></a>
+</pre>
+
 ## 3. Negated Character (Caret)
 
 Caret `^` symbol is used to check if matching character is the first character
